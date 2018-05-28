@@ -10,15 +10,7 @@ public class Jenga {
 	String jugador2;
 	String ganador;
 	int cont=0;
-
-	public ArrayList<Nivel> getNiveles() {
-		return niveles;
-	}
-
-	public void setNiveles(ArrayList<Nivel> niveles) {
-		this.niveles = niveles;
-	}
-
+	
 	// constructor: crea los niveles
 	public Jenga(int cantNiv, String j1, String j2) {
 		this.jugador1 = j1;
@@ -30,6 +22,26 @@ public class Jenga {
 			niveles.add(niv);
 		}
 	}
+	
+	public String getJugador1() {
+		return jugador1;
+	}
+
+	public void setJugador1(String jugador1) {
+		this.jugador1 = jugador1;
+	}
+
+	public String getJugador2() {
+		return jugador2;
+	}
+
+	public void setJugador2(String jugador2) {
+		this.jugador2 = jugador2;
+	}
+	
+	public int altura() {
+		return this.niveles.size();
+	}
 
 	void agregarNivel() {
 		Nivel n = new Nivel();
@@ -39,14 +51,28 @@ public class Jenga {
 		niveles.add(n);
 	}
 	
-	public int altura() {
-		return this.niveles.size();
+	public String ganador() {
+		if(cont%2 == 0) {
+			ganador = this.jugador2;
+		}else {
+			ganador = this.jugador1;
+		}	
+		return ganador;
 	}
-
 	
-	void jugar() {
-		
+	int primerNivelPosible() {
+		Random ran = new Random();
+		int nivel = ran.nextInt(niveles.size() -1);
+		return nivel;	
 	}
+	
+	int piezaRecomendada() {
+		Random ran = new Random();
+		int pieza = ran.nextInt(3);
+		return pieza;		
+	}
+	
+	void jugar() {}
 	
 	void quitar(int indiceNivel, int indicePieza) {
 
@@ -88,29 +114,7 @@ public class Jenga {
 			System.out.println("no esta diponible para quitar");
 		}
 		cont++;
-	}
-	 
-	public String ganador() {
-		if(cont%2 == 0) {
-			ganador = this.jugador2;
-		}else {
-			ganador = this.jugador1;
-		}
-		
-		return ganador;
-	}
-	
-	int primerNivelPosible() {
-		Random ran = new Random();
-		int nivel = ran.nextInt(niveles.size() -1);
-		return nivel;	
-	}
-	
-	int piezaRecomendada() {
-		Random ran = new Random();
-		int pieza = ran.nextInt(3);
-		return pieza;		
-	}
+	}	
 
 	void mostrar() {
 		int contador= 0;
@@ -127,21 +131,5 @@ public class Jenga {
 	@Override
 	public String toString() {
 		return "[" + niveles + "]";
-	}
-
-	public String getJugador1() {
-		return jugador1;
-	}
-
-	public void setJugador1(String jugador1) {
-		this.jugador1 = jugador1;
-	}
-
-	public String getJugador2() {
-		return jugador2;
-	}
-
-	public void setJugador2(String jugador2) {
-		this.jugador2 = jugador2;
-	}
+	}	
 }
