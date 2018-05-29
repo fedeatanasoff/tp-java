@@ -7,26 +7,39 @@ public class Prueba {
 	public static void main(String[] args) {
 
 		
-		Jenga juego = new Jenga(3,"jugador 1", "jugador 2");
+		Jenga juego = new Jenga(5,"jugador 1", "jugador 2");
 		
 		//juego.quitar(0, 2);
 		//System.out.println("test ganadr : "+juego.getGanador());
-		//juego.quitarPieza(0, 0);
-		//juego.quitarPieza(0, 0);
+		//juego.quitar(0, 0);
+		//juego.quitar(0, 2);
+		Nivel niv = new Nivel();
+		//niv.setearPieza(1);
+		//niv.setearPieza(2);
+		juego.quitar(0, 0);
+		juego.quitar(0, 0);
+		juego.quitar(0, 1);
+		juego.mostrar();
+		
 		//System.out.println(juego.toString());
-		Random rd = new Random();
+		/*while( juego.ganador().equals("-") ) {
+			juego.jugar();
+			juego.mostrar();
+		}
+		System.out.println("el ganador es "+juego.ganador());*/
+		/*Random rd = new Random();
 		int nivel = rd.nextInt(juego.niveles.size()-1);
 		int pieza = rd.nextInt(3);
 		
 		int contador = 0;
-		/*while( juego.ganador().equals("vacio") ) {
+		while( juego.ganador().equals("-") ) {
 			juego.quitar(nivel, pieza);
 			System.out.println("cantidad de vueltas "+contador);
 			contador++;
 			juego.mostrar();
-		}*/
+		}
 		
-		System.out.println(juego.ganador());
+		System.out.println(juego.ganador());*/
 		//System.out.println(juego.piezaRecomendada());
 		//System.out.println(juego.primerNivelPosible());
 		//System.out.println(juego.ganador());

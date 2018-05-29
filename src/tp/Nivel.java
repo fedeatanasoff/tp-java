@@ -51,11 +51,11 @@ public class Nivel {
 	}	
 
 	public int chequear() {
-		if((piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 1) || (piezas.get(0) == 1 && piezas.get(1) == 1 && piezas.get(2) == 0) ) {
+		if(piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 1 || piezas.get(0) == 1 && piezas.get(1) == 1 && piezas.get(2) == 0) {
 			return 10;
 		}else if ((piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 0)) {
 			return 50;
-		}else if ((piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 1) || (piezas.get(0) == 1 && piezas.get(1) == 0 && piezas.get(2) == 0) || (piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 0)) {
+		}else if (piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 1 || piezas.get(0) == 1 && piezas.get(1) == 0 && piezas.get(2) == 0 || piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 0) {
 			return 100;
 		}else {
 			return 0;

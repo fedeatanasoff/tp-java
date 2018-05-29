@@ -8,7 +8,7 @@ public class Jenga {
 	ArrayList<Nivel> niveles; // inicializo
 	String jugador1;
 	String jugador2;
-	String ganador= "vacio";
+	String ganador= "-";
 	int cont=0;
 	
 	// constructor: crea los niveles
@@ -79,17 +79,63 @@ public class Jenga {
 		int nivel = primerNivelPosible();
 		int pieza = piezaRecomendada();
 		
-		try {
-			quitar(nivel, pieza);			
-		} catch( Exception e) {
-			e.printStackTrace();
-			System.out.println("la pieza no esta disponible para quitar");
-		}
+		quitar(nivel, pieza);
 	}
 	
 	void quitar(int indiceNivel, int indicePieza) {
-		System.out.println("ganador inicia en "+ getGanador());
-		if (niveles.get(indiceNivel).estaDisponible(indicePieza)) {
+		
+		try {
+			if (!niveles.get(indiceNivel).estaDisponible(indicePieza)) {
+				System.out.println("nivel: "+indiceNivel +" - pieza :"+indicePieza);
+				throw new Exception("la pieza no esta disponible");
+			}else {
+				System.out.println("---------- Jugada Nº "+(cont +1)+" -------------");
+				System.out.println("nivel: "+indiceNivel +" - pieza :"+indicePieza);
+				System.out.println("la pieza esta disponible");
+				System.out.println("creacion del random para la probabilidad");
+				Random rd = new Random();
+				int random = rd.nextInt(98) +1;
+				Nivel ultimo = niveles.get(niveles.size() - 1);
+				
+				System.out.println("seteo la pieza elegida a 0");
+				niveles.get(indiceNivel).setearPieza(indicePieza);
+				
+				System.out.println("empieza chequeo de probabilidad");
+				if (niveles.get(0).chequear() < random) {
+					System.out.println("PERDISTE. " + "numero random: "+ random+ " y la probabilidad de perder era del "+niveles.get(0).chequear());
+					if(cont%2 == 0) {
+						setGanador(this.jugador2);
+					}else {
+						setGanador(this.jugador1);
+					}
+					System.out.println("ha ganado el jugador: "+ getGanador());	
+					System.out.println("---------- Fin Del Juego ----------");
+					throw new Exception("se ha encontrado un ganador");
+				} else {
+					System.out.println("EL JUEGO SIGUE. El numero random es "+random+ " y la probabilidad de perder era del "+niveles.get(0).chequear());
+					if (ultimo.estaCompleto()) {
+						//System.out.println("el ultimo nivel esta completo");
+						agregarNivel();
+						ultimo = niveles.get(niveles.size() - 1);
+						//System.out.println("niveles2: " + niveles.size());
+						ultimo.agregarPieza(); // agrega la pieza
+					} else {
+						//System.out.println("el ultimo nivel no esta completo");
+						ultimo.agregarPieza(); // agrega la pieza
+					}
+					
+					setGanador("-");
+					System.out.println("el ganador es "+getGanador());
+					System.out.println("---------- Fin Vuelta ----------");
+					System.out.println("");
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		
+		/*if (niveles.get(indiceNivel).estaDisponible(indicePieza)) {
 			
 			Random rd = new Random();
 			int random = rd.nextInt(98) +1;
@@ -109,6 +155,7 @@ public class Jenga {
 					setGanador(this.jugador1);
 				}
 				System.out.println("ha ganado el jugador: "+ getGanador());	
+				System.out.println("---------- Fin Del Juego ----------");
 				
 			}else {
 				System.out.println("EL JUEGO SIGUE. El numero random es "+random+ " y la probabilidad de perder era del "+niveles.get(0).chequear());
@@ -123,7 +170,7 @@ public class Jenga {
 					ultimo.agregarPieza(); // agrega la pieza
 				}
 				
-				setGanador("vacio");
+				setGanador("-");
 				System.out.println("el ganador es "+getGanador());
 				System.out.println("---------- Fin Vuelta ----------");
 			}
@@ -131,7 +178,7 @@ public class Jenga {
 		} else {
 			System.out.println("");
 			System.out.println("no esta diponible para quitar");
-		}
+		}*/
 		cont++;
 	}	
 
@@ -145,6 +192,7 @@ public class Jenga {
 				System.out.print("" + niveles.get(i).piezas.get(j) );
 			}
 		}
+		System.out.println("");
 	}
 
 	@Override
