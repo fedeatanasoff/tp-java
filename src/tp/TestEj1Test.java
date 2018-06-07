@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class TestEj1Test {
 
-	private Jenga jenga1, jenga2;
+	public Jenga jenga1, jenga2;
 
 	@Before
 	public void setUp() {
@@ -18,14 +18,15 @@ class TestEj1Test {
 	@Test
 	public void test1() {
 		int alturaInicial = jenga1.altura();
-		//jenga1.Jugar();
-		//jenga1.Jugar();
-		//jenga1.Jugar();
-		// System.out.println(alturaInicial +","+ jenga1.altura());
-		// deberia cambiar la altura
+		jenga1.Jugar();
+		jenga1.Jugar();
+		jenga1.Jugar();
+		System.out.println(alturaInicial +","+ jenga1.altura());
+		//deberia cambiar la altura
 		assertTrue(alturaInicial != jenga1.altura());
 	}
 
+	
 	@Test
 	public void test2() {
 		int nivel = jenga2.primerNivelPosible();

@@ -45,12 +45,55 @@ public class Nivel {
 		}
 		return res;
 	}	
+	
+	boolean dosPiezasIzq() {
+		
+		if(piezas.get(0) == 1 && piezas.get(1) == 1 && piezas.get(2) == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean dosPiezasDer() {
+		if(piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(0) == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean medioVacio() {
+		if(piezas.get(0) == 1 && piezas.get(1) == 0 && piezas.get(0) == 1) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	boolean medioSolo() {
+		if(piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(0) == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	
+	boolean esVacio() {
+		if(piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(0) == 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
  
 	public void setearPieza(int indicePieza) {
 		piezas.set(indicePieza, 0);
 	}	
 
-	public int chequear() {
+	/*public int chequear() {
 		if(piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 1 || piezas.get(0) == 1 && piezas.get(1) == 1 && piezas.get(2) == 0) {
 			return 10;
 		}else if ((piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 0)) {
@@ -60,7 +103,7 @@ public class Nivel {
 		}else {
 			return 0;
 		}
-	}
+	}*/
 	
 	@Override
 	public String toString() {
