@@ -11,7 +11,7 @@ public class Nodo {
 
 	@Override
 	public String toString() {
-		return "Nodo [info=" + info + "]";
+		return info.toString();
 	}	
 
 }
