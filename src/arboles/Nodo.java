@@ -1,9 +1,9 @@
 package arboles;
 
-public class Nodo {
+public class Nodo<Integer> {
 	int info;
-	Nodo izq;
-	Nodo der;
+	Nodo<Integer> izq;
+	Nodo<Integer> der;
 	
 	public Nodo(int elem) {
 		this.info = elem;
@@ -11,7 +11,8 @@ public class Nodo {
 
 	@Override
 	public String toString() {
-		return info.toString();
-	}	
+		return ""+ info + "";
+	}
+
 
 }
