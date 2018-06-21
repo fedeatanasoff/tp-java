@@ -16,6 +16,10 @@ public class Prueba {
 		
 		System.out.println(arbol.toString());
 		System.out.println(arbol.balanceado());
+		arbol.eliminar(90);
+		
+		System.out.println(arbol.toString());
+		System.out.println(arbol.balanceado());
 		
 	}
 
