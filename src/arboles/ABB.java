@@ -1,5 +1,7 @@
 package arboles;
 
+import java.util.ArrayList;
+
 public class ABB<Integer> extends AB<Integer> {
 	
 	int nodosCant;
@@ -57,10 +59,11 @@ public class ABB<Integer> extends AB<Integer> {
 		} else if (x > nodo.info) {
 			nodo.der = eliminar(x, nodo.der);
 		}
+		//System.out.println(nodo.toString());
 		return nodo;
 	}
 
-	private int maxVal(Nodo<Integer> nodo) {
+	protected int maxVal(Nodo<Integer> nodo) {
 		while (nodo.der != null) {
 			nodo = nodo.der;
 		}
@@ -79,6 +82,56 @@ public class ABB<Integer> extends AB<Integer> {
 			int altIzq = (nodo.izq == null) ? 0 : super.altura(nodo.izq);
 			int altDer = (nodo.der == null) ? 0 : super.altura(nodo.der);
 			return Math.abs(altIzq - altDer) <= 1 && balanceado(nodo.izq) && balanceado(nodo.der);
+		}
+	}
+	
+	public ArrayList<Integer> inorden() {
+		ArrayList<Integer> listaInt = new ArrayList<>();
+		return inorden(this.raiz, listaInt);
+	}
+
+	private ArrayList<Integer> inorden(Nodo<Integer> nodo, ArrayList<Integer> lista) {
+		if (nodo != null) {
+			lista = inorden(nodo.izq, lista);
+			lista.add(nodo.info);
+			lista = inorden(nodo.der, lista);
+
+		}
+		return lista;
+	}
+	
+	public void rebalancear() {
+		this.raiz = null;
+		ArrayList<Integer> listaNodos = inorden();
+		
+		rebalancear(listaNodos);
+	}
+
+	private void rebalancear(ArrayList<Integer> listaNodos) {
+		ArrayList<Integer> list1 = new ArrayList<Integer>();
+		ArrayList<Integer> list2 = new ArrayList<Integer>();
+		
+		int j = 0;
+		int i = listaNodos.size() / 2 + 1;
+		
+		if (listaNodos.size() > 0) {
+			int mitad = (int) listaNodos.get(listaNodos.size() / 2);
+			this.insertar(mitad);
+			
+			while (j < listaNodos.size() / 2) {
+				list1.add(listaNodos.get(j));
+				j++;
+			}
+			
+			while (i < listaNodos.size()) {
+				list2.add(listaNodos.get(i));
+				i++;
+			}
+			
+			if (list1 != null)
+				rebalancear(list1);
+			if (list2 != null)
+				rebalancear(list2);
 		}
 	}
 	

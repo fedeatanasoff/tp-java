@@ -7,19 +7,21 @@ public class Prueba {
 		
 		
 		ABB<Integer> arbol = new ABB<>();
+		arbol.insertar(15);
 		arbol.insertar(10);
-		arbol.insertar(5);
 		
-		arbol.insertar(12);
-		arbol.insertar(1);
-		arbol.insertar(11);
-		
-		System.out.println(arbol.toString());
-		System.out.println(arbol.balanceado());
-		arbol.eliminar(90);
+		arbol.insertar(9);
+		arbol.insertar(21);
+		arbol.insertar(18);
+		arbol.insertar(27);
 		
 		System.out.println(arbol.toString());
 		System.out.println(arbol.balanceado());
+		arbol.eliminar(11);
+		
+		System.out.println(arbol.toString());
+		System.out.println(arbol.balanceado());
+		System.out.println(arbol.cantNodos());
 		
 	}
 
