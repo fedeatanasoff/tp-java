@@ -4,15 +4,22 @@ import java.util.ArrayList;
 
 public class Nivel {
 
-	ArrayList<Integer> piezas;
+	private ArrayList<Integer> piezas;
 	
 	// constructor: creo las piezas
-		public Nivel() {
-			piezas = new ArrayList<>();
-			for (int i = 0; i < 3; i++) {
-				piezas.add(1);
-			}
+	public Nivel() {
+		piezas = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			piezas.add(1);
 		}
+	}
+	
+	public Nivel(int cero) {
+		piezas = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			piezas.add(cero);
+		}
+	}
 
 	public ArrayList<Integer> getPiezas() {
 		return piezas;
@@ -92,27 +99,9 @@ public class Nivel {
 	public void setearPieza(int indicePieza) {
 		piezas.set(indicePieza, 0);
 	}	
-
-	/*public int chequear() {
-		if(piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 1 || piezas.get(0) == 1 && piezas.get(1) == 1 && piezas.get(2) == 0) {
-			return 10;
-		}else if ((piezas.get(0) == 0 && piezas.get(1) == 1 && piezas.get(2) == 0)) {
-			return 50;
-		}else if (piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 1 || piezas.get(0) == 1 && piezas.get(1) == 0 && piezas.get(2) == 0 || piezas.get(0) == 0 && piezas.get(1) == 0 && piezas.get(2) == 0) {
-			return 100;
-		}else {
-			return 0;
-		}
-	}*/
 	
 	@Override
 	public String toString() {
-		return ""+ piezas + ""+"\n";
-	}
-
-	void imprimir() {
-		for (int i = 0; i < piezas.size(); i++) {
-			System.out.println(piezas.get(i));
-		}
+		return ""+ piezas + "\n";
 	}
 }

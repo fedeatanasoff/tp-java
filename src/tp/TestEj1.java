@@ -1,18 +1,25 @@
 package tp;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-class TestEj1Test {
-
-	public Jenga jenga1, jenga2;
+public class TestEj1 {
+	private Jenga jenga1, jenga2;
+	ArrayList<String> jugadores;
 
 	@Before
 	public void setUp() {
-		jenga1 = new Jenga(10, "j0", "j1");
-		jenga2 = new Jenga(10, "jugador0", "jugador1");
+		jugadores = new ArrayList<String>();
+		jugadores.add("jug0");
+		jugadores.add("jug1");
+		jugadores.add("jug2");
+		
+		jenga1 = new Jenga(10, jugadores);
+		jenga2 = new Jenga(10, jugadores);
 	}
 
 	@Test
@@ -21,12 +28,11 @@ class TestEj1Test {
 		jenga1.Jugar();
 		jenga1.Jugar();
 		jenga1.Jugar();
-		System.out.println(alturaInicial +","+ jenga1.altura());
-		//deberia cambiar la altura
+		// System.out.println(alturaInicial +","+ jenga1.altura());
+		// deberia cambiar la altura
 		assertTrue(alturaInicial != jenga1.altura());
 	}
-
-	
+	/*
 	@Test
 	public void test2() {
 		int nivel = jenga2.primerNivelPosible();
@@ -36,6 +42,5 @@ class TestEj1Test {
 		System.out.println(jenga2.ganador());
 		// deberia haberse caido el jenga!
 		assertTrue(!jenga2.ganador().equals(""));
-	}
-
+	}*/
 }
