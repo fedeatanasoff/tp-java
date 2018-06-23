@@ -1,23 +1,21 @@
 package tp;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class Jenga {
 
-	ArrayList<Nivel> niveles; // inicializo
+	ArrayList<Nivel> niveles; 
 	String perdedor;
-	String ganador;
+	StringBuilder ganador;
 	int turno;	
 	int jugada;
-	ArrayList<String> players;
+	ArrayList<String> players;	
 	
-	// constructor: crea los niveles
 	public Jenga(int cantNiv, ArrayList<String> jugadores) {
 		this.players = jugadores;
 		this.turno = 0;
-		this.ganador= "";
+		this.ganador = new StringBuilder("");
 		this.perdedor= "";
 		
 		niveles = new ArrayList<Nivel>();
@@ -48,7 +46,7 @@ public class Jenga {
 		return getPerdedor();
 	}
 	
-	public String ganador() {
+	public StringBuilder ganador() {
 		return this.ganador;
 	}
 	
@@ -134,8 +132,9 @@ public class Jenga {
 				throw new Exception("la pieza no esta disponible");
 			}else {
 				System.out.println("---------- Jugada Nº "+(jugada +1)+" -------------");
+				System.out.println("Es el turno de: "+this.players.get(turno));
 				System.out.println("Nivel Elegido: "+indiceNivel +" - Pieza Elegida:"+indicePieza);
-				System.out.println("es el turno de: "+this.players.get(turno));
+				
 				Nivel ultimo = niveles.get(niveles.size() - 1);				
 				niveles.get(indiceNivel).setearPieza(indicePieza);
 				
@@ -144,24 +143,15 @@ public class Jenga {
 					//encontre perdedor y lo seteo					
 					setPerdedor(this.players.get(turno));
 					
-					
-				/*	Iterator<String> it = players.iterator();
-					while (it.hasNext()) {
-						this.ganador.append(it.next());
-					}*/
-					for (String nombre : players) {
-						if( !nombre.equals(getPerdedor()) ) {
-							this.ganador += nombre + " - ";
+					// seteo ganador		
+					for( String player: players) {
+						if( !player.equals(getPerdedor()) && !getPerdedor().equals("") ) {
+							this.ganador.append(player).append(" - ");
 						}
-					}
-
-					
-					
-
-					
+					}					
 					
 					System.out.println("ha perdido el jugador: "+ getPerdedor());	
-					System.out.println("---------- Fin Del Juego ----------");
+					System.out.println("---------- Fin De la jugada ----------");
 				} else {
 					System.out.println("EL JUEGO SIGUE..");
 					if (ultimo.estaCompleto()) {
@@ -178,10 +168,8 @@ public class Jenga {
 						turno++;
 					}
 					
-					jugada++;
-					
-					System.out.println("---------- Fin Vuelta ----------");
-					
+					jugada++;					
+					System.out.println("---------- Fin Vuelta ----------");					
 				}
 			}
 		} catch(Exception e) {
@@ -193,20 +181,5 @@ public class Jenga {
 	@Override
 	public String toString() {
 		return " " + niveles + "";
-	}	
-
-	/*void mostrar() {
-		int contador= 0;
-		for (int i = 0; i < niveles.size(); i++) {
-			contador++;
-			System.out.println(" - ");
-
-			for (int j = 0; j < niveles.get(i).piezas.size(); j++) {
-				System.out.print("" + niveles.get(i).piezas.get(j) );
-			}
-		}
-		System.out.println("");
-	}*/
-
-		
+	}			
 }

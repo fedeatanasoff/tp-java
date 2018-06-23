@@ -1,6 +1,7 @@
 package tp;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Nivel {
 
@@ -102,6 +103,14 @@ public class Nivel {
 	
 	@Override
 	public String toString() {
-		return ""+ piezas + "\n";
+		String mostrar = "";
+		Iterator<Integer> it = piezas.iterator();
+		while( it.hasNext()) {
+			mostrar+= it.next();
+		}
+		
+		return "["+mostrar+"]"+"\n";
+		
+		//return ""+ piezas + "\n";
 	}
 }

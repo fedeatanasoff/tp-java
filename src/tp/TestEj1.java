@@ -21,7 +21,7 @@ public class TestEj1 {
 		jenga1 = new Jenga(10, jugadores);
 		jenga2 = new Jenga(10, jugadores);
 	}
-
+	
 	@Test
 	public void test1() {
 		int alturaInicial = jenga1.altura();
@@ -32,7 +32,8 @@ public class TestEj1 {
 		// deberia cambiar la altura
 		assertTrue(alturaInicial != jenga1.altura());
 	}
-	/*
+	
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	public void test2() {
 		int nivel = jenga2.primerNivelPosible();
@@ -42,5 +43,6 @@ public class TestEj1 {
 		System.out.println(jenga2.ganador());
 		// deberia haberse caido el jenga!
 		assertTrue(!jenga2.ganador().equals(""));
-	}*/
+	}
+	
 }
