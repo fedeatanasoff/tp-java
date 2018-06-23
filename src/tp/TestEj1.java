@@ -44,5 +44,4 @@ public class TestEj1 {
 		// deberia haberse caido el jenga!
 		assertTrue(!jenga2.ganador().equals(""));
 	}
-	
 }

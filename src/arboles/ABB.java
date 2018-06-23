@@ -2,7 +2,7 @@ package arboles;
 
 import java.util.ArrayList;
 
-public class ABB<Integer> extends AB<Integer> {
+public class ABB extends AB {
 	
 	int nodosCant;
 	
@@ -10,7 +10,7 @@ public class ABB<Integer> extends AB<Integer> {
 		this.nodosCant = 0;
 	};
 
-	boolean pertenece(int x, Nodo<Integer> nodo) { 
+	boolean pertenece(int x, Nodo nodo) { 
 		if (nodo == null) return false;
 		
 		if (x < nodo.info) return pertenece(x, nodo.izq); 
@@ -24,8 +24,8 @@ public class ABB<Integer> extends AB<Integer> {
 		nodosCant++;
 	}
 	
-	private Nodo<Integer> insertar (int num, Nodo<Integer> nodo){
-		if(nodo == null) return new Nodo<Integer>(num);
+	private Nodo insertar (int num, Nodo nodo){
+		if(nodo == null) return new Nodo(num);
 		
 		if( num < nodo.info) {
 			nodo.der=insertar(num, nodo.der);
@@ -41,7 +41,7 @@ public class ABB<Integer> extends AB<Integer> {
 		this.raiz= eliminar(x, this.raiz);	
 	}
 
-	protected Nodo<Integer> eliminar(int x, Nodo<Integer> nodo) {
+	protected Nodo eliminar(int x, Nodo nodo) {
 		if (nodo == null)
 			return null;
 		if (x == nodo.info) {
@@ -63,7 +63,7 @@ public class ABB<Integer> extends AB<Integer> {
 		return nodo;
 	}
 
-	protected int maxVal(Nodo<Integer> nodo) {
+	protected int maxVal(Nodo nodo) {
 		while (nodo.der != null) {
 			nodo = nodo.der;
 		}
@@ -75,7 +75,7 @@ public class ABB<Integer> extends AB<Integer> {
 		return balanceado(raiz);
 	}
 
-	private boolean balanceado(Nodo<Integer> nodo) {
+	private boolean balanceado(Nodo nodo) {
 		if (nodo == null)
 			return true;
 		else {
@@ -86,18 +86,21 @@ public class ABB<Integer> extends AB<Integer> {
 	}
 	
 	public ArrayList<Integer> inorden() {
-		ArrayList<Integer> listaInt = new ArrayList<>();
-		return inorden(this.raiz, listaInt);
+		ArrayList<Integer> listInorden = new ArrayList<>();
+		return inorden(this.raiz, listInorden);
 	}
 
-	private ArrayList<Integer> inorden(Nodo<Integer> nodo, ArrayList<Integer> lista) {
+	private ArrayList<Integer> inorden(Nodo nodo, ArrayList<Integer> listInorden) {
 		if (nodo != null) {
-			lista = inorden(nodo.izq, lista);
-			lista.add(nodo.info);
-			lista = inorden(nodo.der, lista);
+			//acomodo izq
+			listInorden = inorden(nodo.izq, listInorden);
+			//meto raiz
+			listInorden.add(nodo.info);
+			//acomodo der
+			listInorden = inorden(nodo.der, listInorden);
 
 		}
-		return lista;
+		return listInorden;
 	}
 	
 	public void rebalancear() {

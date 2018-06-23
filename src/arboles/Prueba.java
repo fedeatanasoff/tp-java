@@ -6,23 +6,29 @@ public class Prueba {
 		// TODO Auto-generated method stub
 		
 		
-		ABB<Integer> arbol = new ABB<>();
-		arbol.insertar(15);
-		arbol.insertar(10);
+		ABB abBalanceado, abVacio, abDesbalanceado;
+		abVacio = new ABB();
+		abDesbalanceado = new ABB();
+		abDesbalanceado.insertar(5);
+		abDesbalanceado.insertar(3);
+		abDesbalanceado.insertar(1);
 		
-		arbol.insertar(9);
-		arbol.insertar(21);
-		arbol.insertar(18);
-		arbol.insertar(27);
+		abBalanceado = new ABB();
+		abBalanceado.insertar(8);
+		abBalanceado.insertar(3);
+		abBalanceado.insertar(10);
+		abBalanceado.insertar(1);
+		abBalanceado.insertar(6);
+		abBalanceado.insertar(4);
+		abBalanceado.insertar(7);
+		abBalanceado.insertar(14);
+		abBalanceado.insertar(9);
 		
-		System.out.println(arbol.toString());
-		System.out.println(arbol.balanceado());
-		arbol.eliminar(11);
-		
-		System.out.println(arbol.toString());
-		System.out.println(arbol.balanceado());
-		System.out.println(arbol.cantNodos());
-		
+		System.out.println(abBalanceado.balanceado());
+		System.out.println(abVacio.balanceado());
+		System.out.println(abDesbalanceado.balanceado());
+		abDesbalanceado.rebalancear();
+		System.out.println(abDesbalanceado.balanceado());
 	}
 
 }
