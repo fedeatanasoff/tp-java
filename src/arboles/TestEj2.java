@@ -38,8 +38,13 @@ public class TestEj2 {
 	}
 	
 	@Test
-	public void testRebalancear() {
-		abDesbalanceado.rebalancear();
-		assertTrue(abDesbalanceado.balanceado());
+	public void testIrep() {
+		assertTrue(abVacio.irep());
+		assertTrue(abDesbalanceado.irep());
+		assertTrue(abBalanceado.irep());
+		abBalanceado.romperIrep();
+		assertFalse(abBalanceado.irep());
 	}
+	
+	
 }

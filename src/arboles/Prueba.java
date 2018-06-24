@@ -10,7 +10,7 @@ public class Prueba {
 		abVacio = new ABB();
 		abDesbalanceado = new ABB();
 		abDesbalanceado.insertar(5);
-		abDesbalanceado.insertar(3);
+		abDesbalanceado.insertar(6);
 		abDesbalanceado.insertar(1);
 		
 		abBalanceado = new ABB();
@@ -24,11 +24,16 @@ public class Prueba {
 		abBalanceado.insertar(14);
 		abBalanceado.insertar(9);
 		
-		System.out.println(abBalanceado.balanceado());
-		System.out.println(abVacio.balanceado());
+		/*System.out.println(abBalanceado.balanceado());
+		System.out.println(abVacio.balanceado());*/
 		System.out.println(abDesbalanceado.balanceado());
-		abDesbalanceado.rebalancear();
-		System.out.println(abDesbalanceado.balanceado());
+		System.out.println(abDesbalanceado.toString());
+		//abDesbalanceado.rebalancear();
+		//System.out.println(abDesbalanceado.buscar(2));
+		//abDesbalanceado.borrar(4);
+		//System.out.println(abDesbalanceado.toString());
+		
+		//System.out.println();
 	}
 
 }
