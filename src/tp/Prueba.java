@@ -8,10 +8,10 @@ public class Prueba {
 		ArrayList<String> jugs = new ArrayList<>();
 		jugs.add("j1");
 		jugs.add("j2");
-		jugs.add("j3");
-		jugs.add("j4");
+		//jugs.add("j3");
+		//jugs.add("j4");
 				
-		Jenga jenga1 = new Jenga(8, jugs);	
+		Jenga jenga1 = new Jenga(2, jugs);	
 	
 		// MODO - Automatico
 		while( jenga1.perdedor().equals("") ) {

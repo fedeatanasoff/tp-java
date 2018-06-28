@@ -1,6 +1,7 @@
 package arboles;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -44,6 +45,12 @@ public class TestEj2 {
 		assertTrue(abBalanceado.irep());
 		abBalanceado.romperIrep();
 		assertFalse(abBalanceado.irep());
+	}
+	
+	@Test
+	public void testEliminar() {
+		abBalanceado.eliminar(14);
+		assertNull(abBalanceado.buscar(14));
 	}
 	
 	

@@ -42,9 +42,9 @@ public class ABB extends AB {
 
 	private Nodo insertar(Integer num, Nodo nodo) {
 		if (nodo == null)
-			return new Nodo(num);
+			return new Nodo(num);		
 
-		if (num < nodo.info) {
+		if (num.compareTo(nodo.info) > 0) {
 			nodo.hd = insertar(num, nodo.hd);
 		} else {
 			nodo.hi = insertar(num, nodo.hi);
@@ -53,20 +53,7 @@ public class ABB extends AB {
 		return nodo;
 	}
 
-	// BOOLEAN BALANCEADO
-	public boolean balanceado() {
-		return balanceado(raiz);
-	}
-
-	private boolean balanceado(Nodo nodo) {
-		if (nodo == null)
-			return true;
-		else {
-			int altIzq = (nodo.hi == null) ? 0 : altura(nodo.hi);
-			int altDer = (nodo.hd == null) ? 0 : altura(nodo.hd);
-			return Math.abs(altIzq - altDer) <= 1 && balanceado(nodo.hi) && balanceado(nodo.hd);
-		}
-	}
+	
 
 	public ArrayList<Integer> inOrden() {
 		ArrayList<Integer> listInorden = new ArrayList<>();
@@ -99,6 +86,22 @@ public class ABB extends AB {
 		return 1 +cantIzq+ cantDer;	
 	}
 	
+	// BOOLEAN BALANCEADO
+		public boolean balanceado() {
+			return balanceado(raiz);
+		}
+
+		private boolean balanceado(Nodo nodo) {
+			if (nodo == null)
+				return true;
+			else {
+				int altIzq = (nodo.hi == null) ? 0 : altura(nodo.hi);
+				int altDer = (nodo.hd == null) ? 0 : altura(nodo.hd);
+				return Math.abs(altIzq - altDer) <= 1 && balanceado(nodo.hi) && balanceado(nodo.hd);
+			}
+		}
+	
+	// romper IREP
 	public boolean irep()
 	{
 		return ((this.nodosInsertados() ==  this.nodosInsertados)) ? true : false;
@@ -108,6 +111,40 @@ public class ABB extends AB {
 	{
 		this.nodosInsertados++;
 	}
+	
+	public void eliminar(Integer valor) {
+		this.raiz = eliminar(valor, this.raiz);
+	}
+	
+	// ELIMINAR
+	private Nodo eliminar(Integer x, Nodo nodo) {
+		if (nodo.equals(null))
+			return null;
+		if (x.equals(nodo.info)) {
+			// Es una hoja o tiene un solo hijo: devolver el otro.
+			// (No hace falta recursión cuando hay un solo hijo.)
+			if (nodo.hi == null)
+				return nodo.hd;
+			if (nodo.hd == null)
+				return nodo.hi;
+			// Tiene dos hijos: intercambiar por el maximo de la izquierda.
+			nodo.info = maxVal(nodo.hi);
+			nodo.hi = eliminar(nodo.info, nodo.hi);
+			
+		} else if (x.compareTo(nodo.info) < 0) {
+			nodo.hi = eliminar(x, nodo.hi);
+		} else if (x.compareTo(nodo.info) > 0) {
+			nodo.hd = eliminar(x, nodo.hd);
+		}
+		return nodo;
+	}
+
+	private int maxVal(Nodo nodo) {
+		while (nodo.hd != null) {
+			nodo = nodo.hd;
+		}
+		return nodo.info;
+	}
 	/*
 	private int cantNodosIzq(NodoABB<Integer> nodo)
 	{
@@ -134,90 +171,7 @@ public class ABB extends AB {
 		int cantDer= (nodo.der == null) ?0 : cantNodosDer(nodo.der);
 		return cantDer;
 		
-	}
-	
-	/*public boolean eliminar(Integer valor) {
-		Nodo aux = this.raiz;
-		Nodo padre = this.raiz;
-		boolean hijoIzq = true;
-
-		while (aux.info != valor) {
-			padre = aux;
-
-			if (valor < aux.info) {
-				hijoIzq = true;
-				aux = aux.hi;
-			} else {
-				hijoIzq = false;
-				aux = aux.hi;
-			}
-
-			if (aux == null) {
-				System.out.println("no encontro el nodo");
-				return false;
-			}
-		} // ---- while
-
-		if (aux.hi == null && aux.hd == null) { // pregunto si es hoja
-			if (aux == this.raiz) {
-				this.raiz = null;
-			} else if (hijoIzq) {
-				padre.hi = null;
-			} else {
-				padre.hd = null;
-			}
-		} else if (aux.hd == null) {
-			if (aux == this.raiz) {
-				this.raiz = aux.hd;
-			} else if (hijoIzq) {
-				padre.hi = aux.hi;
-			} else {
-				padre.hd = aux.hi;
-			}
-		} else if (aux.hi == null) {
-			if (aux == this.raiz) {
-				this.raiz = aux.hd;
-			} else if (hijoIzq) {
-				padre.hi = aux.hd;
-			} else {
-				padre.hd = aux.hi;
-			}
-		} else {
-
-			Nodo nodo = reemplazarNodo(aux);
-			if (aux == this.raiz) {
-				this.raiz = nodo;
-			} else if (hijoIzq) {
-				padre.hi = nodo;
-			} else {
-				padre.hd = nodo;
-			}
-			nodo.hi = aux.hi;
-		}
-		System.out.println("encontro a nuestro nodo a eliminar");
-		return true;
-	}
-	
-	
-	public Nodo reemplazarNodo(Nodo n) {
-		Nodo nodo = n;
-		Nodo reemplazar = n;
-		Nodo aux = n.hd;
-		
-		while(aux != null) {
-			n = reemplazar;
-			reemplazar = aux;
-			aux = aux.hi;
-		}
-		
-		if( reemplazar != n.hd) {
-			nodo.hi = reemplazar.hd;
-			reemplazar.hd = reemplazar.hd;
-		}
-		System.out.println("nodo reemplazo es :"+ reemplazar);
-		return reemplazar;
 	}*/
-
 
 }
 

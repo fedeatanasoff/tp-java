@@ -15,6 +15,24 @@ public class AB {
 		return (this.raiz == null) ? 0 : altura(raiz);
 	}
 	
+	/*public void insertar(Integer elem) {
+		Nodo nuevo = new Nodo(elem);
+		if (raiz == null)
+			raiz = nuevo;
+		else
+			insertar(raiz, nuevo);
+	}
+
+	private void insertar(Nodo padre, Nodo nuevo) {
+		if (padre.hi == null)
+			padre.hi = nuevo;
+		else if (padre.hd == null)
+			padre.hd = nuevo;
+		else
+			// Decisión de implementación: genera el arbol a derecha
+			insertar(padre.hd, nuevo);
+	}*/
+	
 	protected int altura(Nodo nodo) {
 		int altIzq = (nodo.hi == null) ? 0 : altura(nodo.hi) ;
 		int altDer = (nodo.hd == null) ? 0 : altura(nodo.hd) ;
