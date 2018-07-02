@@ -5,181 +5,75 @@ import java.util.Random;
 
 public class Jenga {
 
-	ArrayList<Nivel> niveles; 
-	String perdedor;
-	StringBuilder ganador;
-	int turno;	
-	int jugada;
-	ArrayList<String> players;	
-	
-	public Jenga(int cantNiv, ArrayList<String> jugadores) {
-		this.players = jugadores;
-		this.turno = 0;
-		this.ganador = new StringBuilder("");
-		this.perdedor= "";
-		
-		niveles = new ArrayList<Nivel>();
-		for (int i = 0; i < cantNiv; i++) {
-			Nivel niv = new Nivel();
-			niveles.add(niv);
-		}
-	}
-	
-	public String getPerdedor() {
-		return perdedor;
+	Torre torre;
+
+	public Jenga(int niveles, ArrayList<String> jugadores) {
+		torre = new Torre(niveles, jugadores);
 	}
 
-	private void setPerdedor(String ganador) {
-		this.perdedor = ganador;
+	public StringBuilder ganador() {
+		return torre.ganador();
+	}
+
+	public String perdedor() {
+		return torre.perdedor();
 	}
 
 	public int altura() {
-		return this.niveles.size();
+		return torre.niveles.size();
 	}
 
-	private void agregarNivel() {
-		Nivel n = new Nivel(0);
-		niveles.add(n);
-	}
-	
-	public String perdedor() {	
-		return getPerdedor();
-	}
-	
-	public StringBuilder ganador() {
-		return this.ganador;
-	}
-	
 	public int primerNivelPosible() {
 		Random ran = new Random();
-		int nivel = ran.nextInt(niveles.size() -1);
-		return nivel;	
+		int nivel = ran.nextInt(torre.niveles.size() - 1);
+		int cont1 = 3;
+		int cont2 = 3;
+
+		/*
+		 * PREGUNTO SI EL NIVEL ELEGIDO POR EL RANDOM NO ESTA COMPLETO QUE LO VUELVA A
+		 * SETEAR EN UN MAXIMO DE 3 OPORTUNIDADES
+		 */
+
+		if (!torre.niveles.get(nivel).estaCompleto()) {
+			while (cont1 <= 3) {
+				nivel = ran.nextInt(torre.niveles.size() - 1);
+				cont1++;
+			}
+		} else
+			return nivel;
+
+		/*
+		 * PREGUNTO SI EL NIVEL ELEGIDO NO TIENE DOS PIEZAS, QUE LO VUELVA A SETEAR EN
+		 * UN MAXIMO DE 3 OPORTUNIDADES
+		 */
+
+		if (!torre.niveles.get(nivel).dosPiezasDer() || !torre.niveles.get(nivel).dosPiezasIzq()
+				|| !torre.niveles.get(nivel).medioVacio()) {
+			while (cont2 <= 3) {
+				nivel = ran.nextInt(torre.niveles.size() - 1);
+				cont2++;
+			}
+		} else
+			return nivel;
+
+		return nivel;
 	}
-	
-	public int piezaRecomendada(Nivel niv) {
-		Random r = new Random();
-		int random = r.nextInt(3);
-		
-		if(niv.estaCompleto()) {
-			return random;
-		}else if (niv.dosPiezasDer()) {
-			return 2;
-		}else if (niv.dosPiezasIzq()){
-			return 0;
-		}else if( niv.medioVacio()) {
-			return 0;
-		}else if (niv.medioSolo()) {
-			return 1;
-		}else {
-			System.out.println(niv.toString());
-			return niv.getPiezas().get(4);
-		}
-	}
-	
-	public int chequear(Nivel niv) {
-		if(niv.getPiezas().get(0) == 0 && niv.getPiezas().get(1) == 1 && niv.getPiezas().get(2) == 1) {
-			return 1;
-		}else if ((niv.getPiezas().get(0) == 1 && niv.getPiezas().get(1) == 1 && niv.getPiezas().get(2) == 0)) {
-			return 1;
-		}else if (niv.getPiezas().get(0) == 0 && niv.getPiezas().get(1) == 1 && niv.getPiezas().get(2) == 0) {
-			return 5;
-		}else if (niv.getPiezas().get(0) == 0 && niv.getPiezas().get(1) == 0 && niv.getPiezas().get(2) == 1 ) {
-			return 100;
-		}else if (niv.getPiezas().get(0) == 1 && niv.getPiezas().get(1) == 0 && niv.getPiezas().get(2) == 0) {
-			return 100;
-		}else if (niv.getPiezas().get(0) == 0 && niv.getPiezas().get(1) == 0 && niv.getPiezas().get(2) == 0) {
-			return 100;
-		}else {
-			return 0;
-		}
-	}
-	
-		
-	public boolean probabilidad(int niv) {
-		Random r = new Random();
-		int random = r.nextInt(99) +1;
-		Nivel check = new Nivel();
-		check = this.niveles.get(niv);
-		int proba = 0;
-		
-		System.out.println("porcentaje de probabilidad: "+chequear(check)+"%");
-		System.out.println("niveles encima: " + ((this.niveles.size() -1) - niv));
-		
-		proba+= chequear(check) * ((this.niveles.size() -1) - niv)  ;
-		System.out.println("numero random: "+ random+ " y la probabilidad de perder era del "+proba+"%");
-		
-		if(random < proba) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	
+
 	void Jugar() {
 		int nivel = primerNivelPosible();
 		Nivel niv = new Nivel();
-		niv = this.niveles.get(nivel);
-		int pieza = piezaRecomendada(niv);
-		
+		niv = torre.niveles.get(nivel);
+		int pieza = torre.piezaRecomendada(niv);
+
 		quitar(nivel, pieza);
 	}
-	
-	void quitar(int indiceNivel, int indicePieza) {
-		
-		try {
-			if (!niveles.get(indiceNivel).estaDisponible(indicePieza)) {
-				System.out.println("nivel: "+indiceNivel +" - pieza :"+indicePieza);
-				throw new Exception("la pieza no esta disponible");
-			}else {
-				System.out.println("---------- Jugada Nº "+(jugada +1)+" -------------");
-				System.out.println("Es el turno de: "+this.players.get(turno));
-				System.out.println("Nivel Elegido: "+indiceNivel +" - Pieza Elegida:"+indicePieza);
-				
-				Nivel ultimo = niveles.get(niveles.size() - 1);				
-				niveles.get(indiceNivel).setearPieza(indicePieza);
-				
-				if (probabilidad(indiceNivel)) {
-					System.out.println("PERDISTE. ");
-					//encontre perdedor y lo seteo					
-					setPerdedor(this.players.get(turno));
-					
-					// seteo ganador		
-					for( String player: players) {
-						if( !player.equals(getPerdedor()) && !getPerdedor().equals("") ) {
-							this.ganador.append(player).append(" - ");
-						}
-					}					
-					
-					System.out.println("ha perdido el jugador: "+ getPerdedor());	
-					System.out.println("---------- Fin De la jugada ----------");
-				} else {
-					System.out.println("EL JUEGO SIGUE..");
-					if (ultimo.estaCompleto()) {
-						agregarNivel();
-						ultimo = niveles.get(niveles.size() - 1);
-						ultimo.agregarPieza();
-					} else {
-						ultimo.agregarPieza();
-					}
-					
-					if( turno == this.players.size() -1){
-						turno = 0;
-					}else{
-						turno++;
-					}
-					
-					jugada++;					
-					System.out.println("---------- Fin Vuelta ----------");					
-				}
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-		}		
+
+	void quitar(int nivel, int pieza) {
+		torre.mover(nivel, pieza);
 	}
 
 	@Override
 	public String toString() {
-		return " " + niveles + "";
-	}			
+		return " " + torre.niveles + "";
+	}
 }
