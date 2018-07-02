@@ -11,11 +11,9 @@ public class AB {
 		return this.raiz == null;
 	}
 	
-	public int altura() {
-		return (this.raiz == null) ? 0 : altura(raiz);
-	}
 	
-	/*public void insertar(Integer elem) {
+	
+	public void insertar(Integer elem) {
 		Nodo nuevo = new Nodo(elem);
 		if (raiz == null)
 			raiz = nuevo;
@@ -31,13 +29,18 @@ public class AB {
 		else
 			// Decisión de implementación: genera el arbol a derecha
 			insertar(padre.hd, nuevo);
-	}*/
+	}
 	
+	/*
+	 * 
+	 * public int altura() {
+		return (this.raiz == null) ? 0 : altura(raiz);
+	}
 	protected int altura(Nodo nodo) {
 		int altIzq = (nodo.hi == null) ? 0 : altura(nodo.hi) ;
 		int altDer = (nodo.hd == null) ? 0 : altura(nodo.hd) ;
 		return 1 + Math.max(altIzq, altDer);
-	}	
+	}	*/
 		
 	@Override
 	public String toString() {

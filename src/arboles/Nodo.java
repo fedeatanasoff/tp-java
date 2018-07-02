@@ -11,9 +11,17 @@ public class Nodo {
 		this.hd = null;
 	}
 
+	public Integer getAltura() {
+		return altura;
+	}
+
+	public void setAltura(Integer altura) {
+		this.altura = altura;
+	}
+
 	@Override
 	public String toString() {
-		return "" + info + "";
+		return "valor: " + info + " altura: "+ altura+ "\n";
 	}
 
 
