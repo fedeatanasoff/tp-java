@@ -53,5 +53,14 @@ public class TestEj2 {
 		assertNull(abBalanceado.buscar(14));
 	}
 	
+	@Test
+	public void testAltura() {
+		//System.out.println(abBalanceado.toString());
+		assertTrue(abBalanceado.buscar(1).getAltura() == 0);
+		abBalanceado.eliminar(3);
+		assertFalse(abBalanceado.buscar(1).getAltura() == 0);
+		//System.out.println(abBalanceado.toString());
+	}
+	
 	
 }

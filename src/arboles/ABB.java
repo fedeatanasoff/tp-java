@@ -120,8 +120,8 @@ public class ABB extends AB {
 	}
 
 	/*
-	 * // BOOLEAN BALANCEADO public boolean balanceado() { return balanceado(raiz);
-	 * }
+	 * // BOOLEAN BALANCEADO VIEJO public boolean balanceado() { return
+	 * balanceado(raiz); }
 	 * 
 	 * private boolean balanceado(Nodo nodo) { if (nodo == null) return true; else {
 	 * int altIzq = (nodo.hi == null) ? 0 : altura(nodo.hi); int altDer = (nodo.hd
@@ -139,11 +139,11 @@ public class ABB extends AB {
 		int altder = 0;
 
 		if (n.hi != null) {
-			altizq = altura(n.hi);
+			altizq = n.altura;
 			condicion = condicion && balanceado(n.hi);
 		}
 		if (n.hd != null) {
-			altder = altura(n.hd);
+			altder = n.altura;
 			condicion = condicion && balanceado(n.hd);
 		}
 		int dif = Math.abs(altizq - altder);
@@ -202,6 +202,7 @@ public class ABB extends AB {
 		} else if (x.compareTo(nodo.info) > 0) {
 			nodo.hd = eliminar(x, nodo.hd);
 		}
+		//SETEO LA ALTURA
 		setearAltura(nodo);
 		return nodo;
 	}
@@ -213,38 +214,6 @@ public class ABB extends AB {
 		return nodo.info;
 	}
 
-	// ELIMINAR
-	/*
-	 * private Nodo eliminar(Integer x, Nodo nodo) { if (nodo.equals(null)) return
-	 * null; if (x.equals(nodo.info)) { // Es una hoja o tiene un solo hijo:
-	 * devolver el otro. // (No hace falta recursión cuando hay un solo hijo.) if
-	 * (nodo.hi == null) return nodo.hd; if (nodo.hd == null) return nodo.hi; //
-	 * Tiene dos hijos: intercambiar por el maximo de la izquierda. nodo.info =
-	 * maxVal(nodo.hi); nodo.hi = eliminar(nodo.info, nodo.hi);
-	 * 
-	 * } else if (x.compareTo(nodo.info) < 0) { nodo.hi = eliminar(x, nodo.hi); }
-	 * else if (x.compareTo(nodo.info) > 0) { nodo.hd = eliminar(x, nodo.hd); }
-	 * return nodo; }
-	 * 
-	 * private int maxVal(Nodo nodo) { while (nodo.hd != null) { nodo = nodo.hd; }
-	 * return nodo.info; }
-	 */
-	/*
-	 * private int cantNodosIzq(NodoABB<Integer> nodo) { int cantIzq= (nodo.izq ==
-	 * null) ?0 : cantNodosIzq(nodo.izq); return cantIzq;
-	 * 
-	 * } private int cantNodosDer(NodoABB<Integer> nodo) { int cantDer= (nodo.der ==
-	 * null) ?0 : cantNodosDer(nodo.der); return cantDer;
-	 * 
-	 * }
-	 * 
-	 * /* private int cantNodosIzq(NodoABB<Integer> nodo) { int cantIzq= (nodo.izq
-	 * == null) ?0 : cantNodosIzq(nodo.izq); return cantIzq;
-	 * 
-	 * } private int cantNodosDer(NodoABB<Integer> nodo) { int cantDer= (nodo.der ==
-	 * null) ?0 : cantNodosDer(nodo.der); return cantDer;
-	 * 
-	 * }
-	 */
+	
 
 }
