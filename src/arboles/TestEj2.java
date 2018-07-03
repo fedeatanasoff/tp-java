@@ -13,12 +13,12 @@ public class TestEj2 {
 	@Before
 	public void setUp() throws Exception {
 		abVacio = new ABB();
-		
+
 		abDesbalanceado = new ABB();
 		abDesbalanceado.insertar(5);
 		abDesbalanceado.insertar(3);
 		abDesbalanceado.insertar(1);
-		
+
 		abBalanceado = new ABB();
 		abBalanceado.insertar(8);
 		abBalanceado.insertar(3);
@@ -37,7 +37,7 @@ public class TestEj2 {
 		assertTrue(abVacio.balanceado());
 		assertFalse(abDesbalanceado.balanceado());
 	}
-	
+
 	@Test
 	public void testIrep() {
 		assertTrue(abVacio.irep());
@@ -46,21 +46,26 @@ public class TestEj2 {
 		abBalanceado.romperIrep();
 		assertFalse(abBalanceado.irep());
 	}
-	
+
 	@Test
 	public void testEliminar() {
 		abBalanceado.eliminar(14);
 		assertNull(abBalanceado.buscar(14));
 	}
-	
+
 	@Test
 	public void testAltura() {
-		//System.out.println(abBalanceado.toString());
+		// System.out.println(abBalanceado.toString());
 		assertTrue(abBalanceado.buscar(1).getAltura() == 0);
 		abBalanceado.eliminar(3);
 		assertFalse(abBalanceado.buscar(1).getAltura() == 0);
-		//System.out.println(abBalanceado.toString());
+		// System.out.println(abBalanceado.toString());
 	}
-	
-	
+
+	@Test
+	public void testRebalancear() {
+		abDesbalanceado.rebalancear();
+		assertTrue(abDesbalanceado.balanceado());
+	}
+
 }

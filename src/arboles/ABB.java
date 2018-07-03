@@ -172,6 +172,7 @@ public class ABB extends AB {
 	public void eliminar(Integer valor) {
 		if (buscar(valor) != null) {
 			this.raiz = eliminar(valor, this.raiz);
+			nodosInsertados--;
 
 		} else
 			System.out.println("No esta");
@@ -202,7 +203,7 @@ public class ABB extends AB {
 		} else if (x.compareTo(nodo.info) > 0) {
 			nodo.hd = eliminar(x, nodo.hd);
 		}
-		//SETEO LA ALTURA
+		// SETEO LA ALTURA
 		setearAltura(nodo);
 		return nodo;
 	}
@@ -214,6 +215,34 @@ public class ABB extends AB {
 		return nodo.info;
 	}
 
-	
+	public void rebalancear() {
+		this.raiz = null;
+		ArrayList<Integer> nodosArbol = inOrden();
+
+		rebalancear(nodosArbol);
+	}
+
+	private void rebalancear(ArrayList<Integer> nodosArbol) {
+		ArrayList<Integer> nodosIzq = new ArrayList<Integer>();
+		ArrayList<Integer> nodosDer = new ArrayList<Integer>();
+
+		Integer menores = 0;
+		Integer mayores = nodosArbol.size() / 2 + 1;
+
+		if (nodosArbol.size() > 0) {
+			int pivote = nodosArbol.get(nodosArbol.size() / 2);
+			insertar(pivote);
+			while (menores.compareTo(nodosArbol.size() / 2) < 0) {
+				nodosIzq.add(nodosArbol.get(menores));
+				menores++;
+			}
+			while (mayores.compareTo(nodosArbol.size()) < 0) {
+				nodosDer.add(nodosArbol.get(mayores));
+				mayores++;
+			}
+			if (nodosIzq != null) rebalancear(nodosIzq);
+			if (nodosDer != null) rebalancear(nodosDer);
+		}
+	}
 
 }

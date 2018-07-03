@@ -31,6 +31,21 @@ public class AB {
 			insertar(padre.hd, nuevo);
 	}
 	
+	int cantRango(int desde, int hasta) {
+		return cantRango(desde, hasta, this.raiz);
+	}
+	
+	private int cantRango(int desde, int hasta, Nodo nodo) {
+		if( nodo == null) return 0;
+		int cant = 0;
+		
+		if( desde <= nodo.info && nodo.info <= hasta) {
+			cant = 1;
+		}
+		
+		return cant + cantRango(desde, hasta, nodo.hi) + cantRango(desde, hasta, nodo.hd);
+	}
+	
 	/*
 	 * 
 	 * public int altura() {
