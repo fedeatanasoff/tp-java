@@ -244,5 +244,38 @@ public class ABB extends AB {
 			if (nodosDer != null) rebalancear(nodosDer);
 		}
 	}
+	// IENESIMO
+	/*public int iesimo(int pos)
+	{
+		if(raiz==null || this.cantNodos<pos-1)
+			return -1;
+		if (pos==cantNodosIzq(raiz))
+			return raiz.elemento;
+		if (pos< cantNodosIzq(raiz))
+			return iesimo(pos, raiz.izq);
+		else
+			return iesimo( raiz.der,pos,cantNodosIzq(raiz)+1);
+	}
+	
+	private int iesimo(int pos, NodoABB nodo)
+	{
+		if (pos==cantNodosIzq(nodo))
+			return  (Integer)nodo.elemento;
+		if (pos<cantNodosIzq(nodo))
+			return iesimo(pos, nodo.izq);
+		else 
+			return iesimo(nodo.der,pos,  cantNodosIzq(nodo)+1);
+	}
+	
+	private int iesimo(NodoABB nodo, int pos,int cantNodos)
+	{
+		if(pos==cantNodosIzq(nodo)+cantNodos) 
+			return (Integer) nodo.elemento;
+		if(pos>cantNodosDer(nodo)+cantNodos) 
+			return iesimo(nodo.izq, pos, cantNodos);
+		else
+			return iesimo(nodo.der, pos, cantNodosIzq(nodo)+cantNodos+1);
+		
+	}*/
 
 }
