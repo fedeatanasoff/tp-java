@@ -129,3 +129,57 @@ Sea abb una instancia de ABB<Integer> :
    Luego, comparar la cantidad de nodos alcanzables con esa variable.
 
 En todos los ítems se debe justificar la complejidad de la solución elegida.
+
+#### Respecto del Irep de ABB
+
+En cualquier implementación se debe chequear que para todos los nodos ni, los nodos a la izquierda de ni sean menores, y mayores los que están a la derecha.
+Además de chequear que para todo ni IrepAB(ni), que todo ni sea AB.
+
+### Apéndice I: Condiciones de entrega y tutorial de cómo instalar Junit
+
+#### Apéndice II: Test obligatorio ej1
+
+```
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+public class TestEj1 {
+    private Jenga jenga1, jenga2;
+    ArrayList<String> jugadores;
+
+    @Before
+    public void setUp() {
+        jugadores = new ArrayList<String>();
+        Jugadores.add(“jug0”);
+        Jugadores.add(“jug1”);
+        Jugadores.add(“jug2”);
+        jenga1 = new Jenga(10 jugadores);
+        jenga2 = new Jenga(10, jugadores);
+    }
+
+    @Test
+    public void test1() {
+        int alturaInicial = jenga1.altura();
+        jenga1.Jugar();
+        jenga1.Jugar();
+        jenga1.Jugar();
+        //System.out.println(alturaInicial +","+ jenga1.altura());
+        // deberia cambiar la altura
+        assertTrue(alturaInicial != jenga1.altura());
+    }
+
+    @Test
+    public void test2() {
+        int nivel = jenga2.primerNivelPosible();
+        jenga2.quitar(nivel,0);
+        jenga2.quitar(nivel,1);
+        jenga2.quitar(nivel,2);
+        System.out.println(jenga2.ganador());
+
+        // deberia haberse caido el jenga!
+
+        assertTrue(!jenga2.ganador().equals(""));
+    }
+}
+```
