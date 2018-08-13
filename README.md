@@ -24,3 +24,7 @@ Se debe escribir el Irep del ej1 en el informe de no más de una página.
   El jenga debe mantener la altura de manera consistente y forzar el invariante del juego.
 - Según la pieza que se quite existe una diferente probabilidad(%) de perder (i.e. que la torre se
   caiga). Asumiendo un porcentaje máximo de 100 para cada regla.
+
+### Ejemplo para un Jenga de 10 niveles
+
+![Texto alternativo](/probabilidades.jpg)
