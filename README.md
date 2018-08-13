@@ -27,4 +27,4 @@ Se debe escribir el Irep del ej1 en el informe de no más de una página.
 
 ### Ejemplo para un Jenga de 10 niveles
 
-![Texto alternativo](./probabilidades.jpg)
+![Texto alternativo](https://github.com/fedeatanasoff/tp-java/blob/master/probabilidades.png)
