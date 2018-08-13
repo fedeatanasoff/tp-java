@@ -27,4 +27,41 @@ Se debe escribir el Irep del ej1 en el informe de no más de una página.
 
 ### Ejemplo para un Jenga de 10 niveles
 
-![Texto alternativo](https://github.com/fedeatanasoff/tp-java/blob/master/probabilidades.png)
+![Texto alternativo](https://github.com/fedeatanasoff/tp-java/blob/master/prob.png)
+
+Agregar otras reglas al Irep si hace falta.
+
+#### Modelar al TAD Jenga
+
+Escribir el Irep
+Justificar los TAD o clases soporte. Es obligatorio que al menos haya otro TAD
+que no sea una clase de java, que no sea una “cascara” que tan solo enmascare
+una estructura\*.
+
+#### Implementar el TAD
+
+Debe ser consistente con el Irep elegido
+Debe respetar la interfaz propuesta por la cátedra
+Debe cumplir satisfactoriamente el junit de la cátedra
+
+\*Por ejemplo
+Class Jenga
+ArrayList<?> estructura
+…
+No se considera una solución de diseño válida, porque modelar este problema en un solo Tad.
+Tiene mucho acoplamiento, como se explicó en las teóricas.
+
+### Caso de uso de ejemplo 1 "modo automatico"
+
+...
+Jenga unJenga = new Jenga(20,”jug0”, “jug1”) // Jenga de 20 niveles 0..19
+
+While unJenga.ganador() <>
+unJenga.jugar() // juegan los dos jugadores
+system.out.println(unJenga)
+
+system.out.println(unJenga.ganador())
+...
+
+- jugar() debe mantener el Jenga consistente.
+- “system.out.println(unJenga)” invoca a unJenga.toString(), que debería generar un string consistente en un “resumen” de todos los niveles.
