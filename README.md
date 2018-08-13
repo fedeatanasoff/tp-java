@@ -57,8 +57,8 @@ Tiene mucho acoplamiento, como se explicó en las teóricas.
 Jenga unJenga = new Jenga(20,”jug0”, “jug1”) // Jenga de 20 niveles 0..19
 
 While unJenga.ganador() <>
-unJenga.jugar() // juegan los dos jugadores
-system.out.println(unJenga)
+    unJenga.jugar() // juegan los dos jugadores
+    system.out.println(unJenga)
 
 system.out.println(unJenga.ganador())
 ```
@@ -77,6 +77,55 @@ While unJenga.ganador() <> “”
     if (ni ¡= null)
         unJenga.quitar( ni , unJenga.piezaRecomendada(ni))***
 
-system.out.println(unJenga)
+    system.out.println(unJenga)
+
 system.out.println(unJenga.ganador())
 ```
+
+\*Si la pieza o el nivel no existen, debe arrojar una excepción
+La interfaz mínima es la descrita en los ejemplos 1 y 2; los jUnit utilizaran dicha interfaz.
+No es necesario agregar más métodos, en caso de hacerlo justificar y consultar en la clase de
+consulta del TP.
+
+\*\*¿Cuantas piezas tiene que tener un nivel para ser elegible para quitar piezas?
+
+\*\*Notar, que internamente, luego de quitar una pieza hay que agregarla en el último nivel o
+agregar un nivel nuevo. ¿Quien se debería encargar de esto?; hablar de esto en Irep
+
+2. Acoplamiento y cohesion
+
+En la práctica a veces se sacrifica algo del diseño por cuestiones de implementación.
+Explicar, si existe en su código, un ejemplo de Acoplamiento o de de falta de Cohesión.
+
+Va un ejemplo del código fuente de la cátedra:
+“La pieza no será unTAD para nuestro código fuente.
+Sera representada por un Integer por carecer de otras propiedades relevantes (además de su
+ID) para el modelo del problema.
+Notar que la pieza del Jenga tiene tres dimensiones pero elegimos no modelar ese aspecto”
+
+- ¡No significa que si modelan la pieza este mal!
+- ¡Dar un ejemplo distinto para el ejercicio b)!
+
+### EJercicio 2. Arboles
+
+Implementar los siguientes métodos del TAD ABB<Integer> extends AB<Integer>.
+Implementar también los métodos auxiliares o privados.
+
+Sea abb una instancia de ABB<Integer> :
+
+1. **Void eliminar(Integer elem):** que elimina elem si existe. Si no existe no se puede arrojar
+   una excepción.
+2. **boolean balanceado():** que devuelve verdadero si el árbol esta balanceado
+3. **boolean balanceado():** que devuelve verdadero si abb está balanceado y falso en caso
+   contrario.
+4. **void rebalancear():** que dado cualquier abb, lo modifica para que balanceado() devuelve
+   verdadero.
+5. **Integer iesimo(int i):** que devuelve el iesimo nodo, considerando el recorrido inorden.
+   Debe hacerse sin utilizar estructuras auxiliares.
+   Ayuda: Justificar respecto de la cantidad de veces que se recorre cada nodo.
+6. **boolean Irep():** que devuelve verdadero si la cantidad de nodos “alcanzables” difiere de la cantidad de nodos reales.
+   Ayuda: Modificar la implementación de ABB, agregar la variable int cantNodos como variable
+   de instancia del ABB.
+   Luego, comparar la cantidad de nodos alcanzables con esa variable.
+
+En todos los ítems se debe justificar la complejidad de la solución elegida.
