@@ -53,7 +53,7 @@ Tiene mucho acoplamiento, como se explicó en las teóricas.
 
 ### Caso de uso de ejemplo 1 "modo automatico"
 
-...
+```
 Jenga unJenga = new Jenga(20,”jug0”, “jug1”) // Jenga de 20 niveles 0..19
 
 While unJenga.ganador() <>
@@ -61,7 +61,22 @@ unJenga.jugar() // juegan los dos jugadores
 system.out.println(unJenga)
 
 system.out.println(unJenga.ganador())
-...
+```
 
 - jugar() debe mantener el Jenga consistente.
 - “system.out.println(unJenga)” invoca a unJenga.toString(), que debería generar un string consistente en un “resumen” de todos los niveles.
+
+### Caso de uso de ejemplo 2 "modo semi automatico"
+
+```
+Jenga unJenga = new Jenga(20, jugadores) // Jenga de 20 niveles 0..19
+Nivel ni
+While unJenga.ganador() <> “”
+    //unJenga.quitar(2,0) quita la pieza 0 del nivel 2*
+    ni = unJenga.primerNivelPosible()**
+    if (ni ¡= null)
+        unJenga.quitar( ni , unJenga.piezaRecomendada(ni))***
+
+system.out.println(unJenga)
+system.out.println(unJenga.ganador())
+```
